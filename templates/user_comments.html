@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}My Comments{% endblock %}
+{% block content %}
+<section class="comments">
+    <h1 class="heading">My Comments</h1>
+
+    {% if user_comments %}
+        <div class="box-container">
+            {% for comment in user_comments %}
+            <div class="box">
+                <div class="comment-header">
+                    <div class="user">
+                        {% if user.student.profile_pic %}
+                            <img src="{{ user.student.profile_pic.url }}" alt="">
+                        {% else %}
+                            <img src="{% static 'images/Keys.png' %}" alt="">
+                        {% endif %}
+                        <div class="user-info">
+                            <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                            <span>{{ comment.added_at|date:"F d, Y" }}</span>
+                        </div>
+                    </div>
+                    <div class="video-details">
+                        <a href="{% url 'watch-video' comment.course_material.id %}" class="video-link">
+                            <div class="thumb">
+                                <img src="{{ comment.course_material.thumbnail }}" alt="">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <div class="info">
+                                <h4>{{ comment.course_material.title }}</h4>
+                                <p>{{ comment.course_material.course.course_name }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="comment-content">
+                    <div class="comment-text">{{ comment.comment }}</div>
+                    <div class="action-buttons">
+                        <button type="button" class="action-btn edit-btn" onclick="toggleEdit(this)">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <form action="{% url 'delete_comment' comment.id %}" method="post" class="inline">
+                            {% csrf_token %}
+                            <button type="submit" class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                    <form class="edit-form" style="display: none;">
+                        {% csrf_token %}
+                        <textarea class="comment-textarea">{{ comment.comment }}</textarea>
+                        <div class="edit-buttons">
+                            <button type="button" class="action-btn save-btn" onclick="updateComment(this, {{ comment.id }})">
+                                <i class="fas fa-save"></i> Save
+                            </button>
+                            <button type="button" class="action-btn cancel-btn" onclick="toggleEdit(this.parentElement.parentElement)">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty">
+            <img src="{% static 'images/empty-comments.svg' %}" alt="No comments">
+            <h3>No Comments Yet</h3>
+            <p>Start engaging with our courses by adding your thoughts and feedback!</p>
+            <a href="{% url 'courses' %}" class="inline-btn">Browse Courses</a>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function toggleEdit(element) {
+    const commentBox = element.closest('.box').querySelector('.comment-content');
+    const editForm = commentBox.querySelector('.edit-form');
+    const flexBtn = commentBox.querySelector('.flex-btn');
+    
+    if (editForm.style.display === 'none') {
+        editForm.style.display = 'block';
+        flexBtn.style.display = 'none';
+    } else {
+        editForm.style.display = 'none';
+        flexBtn.style.display = 'flex';
+    }
+}
+
+function updateComment(button, commentId) {
+    const form = button.closest('form');
+    const newComment = form.querySelector('textarea').value;
+    const csrfToken = form.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+    fetch('{% url "edit_comment" %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify({
+            comment_id: commentId,
+            comment_edit: newComment
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            const commentBox = form.closest('.box').querySelector('.comment-box');
+            commentBox.textContent = newComment;
+            toggleEdit(form);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+{% endblock %} 
