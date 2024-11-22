@@ -28,19 +28,18 @@
 
 ## Overview
 
-TrashWell the Smart Waste Management System  is an innovative web application designed to streamline waste management processes for households, waste collection services, and administrators. The system aims to enhance waste collection efficiency, promote recycling efforts, and provide insights into environmental impact metrics.
+Innovatech CodingHub the Students Learning Platform is an innovative web application designed to streamline learning processes for the students and other learners, and administrators. The system aims to enhance waste collection learning efficiency, promote education technology efforts, and provide insights into education technology impact metrics.
 
 ## Features
 
 - **User Registration and Login**: Secure user authentication and session management.
-- **Waste Collection Schedule**: Schedule and manage waste collection activities.
-- **Recycling Tracker**: Log and track recycling activities with visualizations and metrics.
+- **Courses Accessibility**: Courses on the platform.
 - **Admin Dashboard**: Monitor system performance, manage users, and generate reports.
 
 ## Prerequisites
 
 Ensure you have the following before starting:
-- Node.js (version 12.x or higher)
+- Jango (version 12.x or higher)
 - PostgreSQL or MySQL
 
 ## Installation
@@ -49,7 +48,7 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/KhotKeys/Innovatech_CodingHub.git
-cd SmartWasteManagementSystem
+cd Innovatech_CodingHub
 ```
 
 Install the dependencies:
@@ -97,44 +96,10 @@ This command will start the server and the application will be accessible at `ht
     "time": "HH:MM"
   }
   ```
-- **Get Schedules**: Retrieve all scheduled collections for a user.
+- **Get Courses**: Retrieve all courses collections for a user.
   ```bash
-  GET /api/schedules
+  GET /api/courses
   ```
-- **Update Schedule**: Update an existing scheduled collection.
-  ```bash
-  PUT /api/schedules/:id
-  {
-    "date": "YYYY-MM-DD",
-    "time": "HH:MM"
-  }
-  ```
-- **Delete Schedule**: Cancel a scheduled collection.
-  ```bash
-  DELETE /api/schedules/:id
-  ```
-
-### Recycling Tracker
-
-- **Log Recycling Activity**: Users can log a new recycling activity.
-  ```bash
-  POST /api/recycling
-  {
-    "date": "YYYY-MM-DD",
-    "material": "string",
-    "amount": "number"
-  }
-  bash
-  GET /api/recycling
-  ```
-- **Update registration/login Activity**: Update an activity.
-  ```bash
-  PUT /api/recycling/:id
-  {
-    "date": "YYYY-MM-DD",
-    "material": "string",
-    "amount": "number"
-  }
 
 ### User Management
 
