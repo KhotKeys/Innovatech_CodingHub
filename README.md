@@ -4,7 +4,7 @@
 
 
 # Link to the slide
-[Click here](https://docs.google.com/presentation/d/1qKl3PCPYqUwRW8_hhTn0iTUWvbM_xlDXx2QDAt8A0as/edit?usp=sharing)
+[Click here](https://docs.google.com/presentation/d/1qKl3PCPYqUwRW8_hhTn0iTUWvbM_xlDXx2QDAt8A0as/edit#slide=id.g2e6a755ee06_1_26)
 
 ## Table of Contents
 - [Overview](#overview)
@@ -14,15 +14,11 @@
 - [Repository Structure](#repository-structure)
 - [Usage](#usage)
   - [Running the Application](#running-the-application)
-  - [Waste Collection Schedule](#waste-collection-schedule)
-  - [Recycling Tracker](#recycling-tracker)
   - [User Management](#user-management)
 - [Testing](#testing)
-  - [Schedule Test](#schedule-test)
   - [Recycling Test](#recycling-test)
   - [User Authentication Test](#user-authentication-test)
 - [CI/CD Pipeline](#cicd-pipeline)
-- [Contributing](#contributing)
 - [License](#license)
 - [Contributor](#contributor)
 
@@ -84,7 +80,16 @@ To run the application, navigate to the project directory in your terminal and s
 npm dev
 ```
 
-This command will start the server and the application will be accessible at `http://localhost:3000`.
+This command will start the server and the application will be accessible at `(https://innovatech.pythonanywhere.com/login)`.
+
+```
+
+*Importance Credentials*
+
+Certificate: 	2b91cdcdd55f62c7b89dca63475555cbb90820e29475ac2434b766a9ef4ddb13
+Public Key:	17d2f71848e5c9a1657cd956cf28b019d440eee726e0a66c54731e799388ac5f
+
+```
 
 ### Waste Collection Schedule
 
@@ -182,10 +187,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 
 ## Live Applications
 
-- **Web Application:** [https://trashwell.onrender.com](https://trashwell.onrender.com)
-- **Admin Web Application:** [https://trashwelladmin.onrender.com](https://trashwelladmin.onrender.com)
+- **Web Application:** [https://innovatech.pythonanywhere.com](https://innovatech.pythonanywhere.com/login)
+- **Admin Web Application:** [https://innovatech.pythonanywhere.com](https://innovatech.pythonanywhere.com/login)
   - **Admin Credentials:**
-    - **Email:** admin2gmail.com
-    - **Password:** secret
+    - **Email:** admin@admin.com
+    - **Password:** admin
 
-## Happy Coding 🎉
+## Happy Ending 🎉
