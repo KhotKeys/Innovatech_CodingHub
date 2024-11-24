@@ -1,10 +1,11 @@
 # Innovatech CodingHub
 
-# Students Learning Platform
+## Student Learning Platform
 
-
-# Link to the slide
+### Link to the Slide  
 [Click here](https://docs.google.com/presentation/d/1qKl3PCPYqUwRW8_hhTn0iTUWvbM_xlDXx2QDAt8A0as/edit#slide=id.g2e6a755ee06_1_26)
+
+---
 
 ## Table of Contents
 - [Overview](#overview)
@@ -16,181 +17,169 @@
   - [Running the Application](#running-the-application)
   - [User Management](#user-management)
 - [Testing](#testing)
-  - [Recycling Test](#recycling-test)
-  - [User Authentication Test](#user-authentication-test)
+  - [Registration Test](#registration-test)
+  - [Login Test](#login-test)
 - [CI/CD Pipeline](#cicd-pipeline)
 - [License](#license)
-- [Contributor](#contributor)
+- [Contributing](#contributing)
+- [Project Owner](#project-owner)
+- [Live Application](#live-application)
+
+---
 
 ## Overview
 
-Innovatech CodingHub the Students Learning Platform is an innovative web application designed to streamline learning processes for the students and other learners, and administrators. The system aims to enhance waste collection learning efficiency, promote education technology efforts, and provide insights into education technology impact metrics.
+**Innovatech CodingHub** is an innovative web application designed to streamline the learning process for students and educators. It offers course accessibility, secure user management, and administrative tools to enhance productivity and learning outcomes. The platform leverages education technology to improve engagement and provide insights into learning impact metrics.
+
+---
 
 ## Features
 
-- **User Registration and Login**: Secure user authentication and session management.
-- **Courses Accessibility**: Courses on the platform.
-- **Admin Dashboard**: Monitor system performance, manage users, and generate reports.
+- **User Registration and Login**: Secure authentication and session management with role-based access.
+- **Courses Accessibility**: Categorized courses by topic and difficulty, accessible to all registered users.
+- **Admin Dashboard**: Insights into user activities, course analytics, and system performance monitoring.
+
+---
 
 ## Prerequisites
 
-Ensure you have the following before starting:
-- Jango (version 12.x or higher)
-- PostgreSQL or MySQL
+Before starting, ensure you have the following:
+- **Python** (version 3.8 or higher)
+- **Django** (version 4.x or higher)
+- **PostgreSQL** or **MySQL**
+- **pipenv** for managing dependencies
+
+---
 
 ## Installation
 
-Clone the repository:
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/KhotKeys/Innovatech_CodingHub.git
+    cd Innovatech_CodingHub
+    ```
 
-```bash
-git clone https://github.com/KhotKeys/Innovatech_CodingHub.git
-cd Innovatech_CodingHub
-```
+2. **Install dependencies**:
+    ```bash
+    pipenv install
+    ```
 
-Install the dependencies:
+3. **Set up the database**:
+    ```bash
+    pipenv run flask db init
+    pipenv run flask db migrate
+    pipenv run flask db upgrade
+    ```
 
-```bash
-npm install
-```
+4. **Start the application**:
+    ```bash
+    pipenv run flask run
+    ```
 
-Set up the database by running migrations:
+The application will be accessible at:  
+[https://innovatech.pythonanywhere.com/login](https://innovatech.pythonanywhere.com/login)
 
-```bash
-npx sequelize-cli db:migrate
-```
+---
 
 ## Repository Structure
 
-When you clone the repository, you'll find the following directories and files:
-- **`frontend/`**: Contains the HTML, CSS, and JavaScript files for the frontend.
-- **`backend/`**: Contains the backend code including routes, models, and middleware.
-- **`admin/`**: Contains the HTML, CSS, and JavaScript files for the admin interface.
-- **`models/`**: Defines the database models.
-- **`routes/`**: Contains the route handlers for different functionalities.
-- **`middleware/`**: Contains middleware for authentication and error handling.
-- **`config/`**: Configuration files for the database and environment settings.
+- **`frontend/`**: HTML, CSS, and JavaScript files for the user interface.
+- **`backend/`**: Backend logic, including API routes, models, and services.
+- **`admin/`**: Interface and scripts for administrative functionality.
+- **`models/`**: Definitions for database schema and relationships.
+- **`routes/`**: Backend route handlers for various functionalities.
+- **`middleware/`**: Middleware for authentication and error handling.
+- **`config/`**: Configuration files for database and environment settings.
+
+---
 
 ## Usage
 
 ### Running the Application
-
-To run the application, navigate to the project directory in your terminal and start the server:
-
+Start the development server with:
 ```bash
-npm dev
+pipenv run flask run
 ```
-
-This command will start the server and the application will be accessible at `(https://innovatech.pythonanywhere.com/login)`.
-
-```
-
-*Importance Credentials*
-
-Certificate: 	2b91cdcdd55f62c7b89dca63475555cbb90820e29475ac2434b766a9ef4ddb13
-Public Key:	17d2f71848e5c9a1657cd956cf28b019d440eee726e0a66c54731e799388ac5f
-
-```
-
-### Waste Collection Schedule
-
-- **Register and login**: Users can access resources turtorials and learn sort of programming and coding Languages.
-  ```bash
-  POST /api/schedules
-  {
-    "date": "YYYY-MM-DD",
-    "time": "HH:MM"
-  }
-  ```
-- **Get Courses**: Retrieve all courses collections for a user.
-  ```bash
-  GET /api/courses
-  ```
+The application will be available at:  
+[https://innovatech.pythonanywhere.com/login](https://innovatech.pythonanywhere.com/login)
 
 ### User Management
-
-- **Get All Users**: Retrieve all users for the admin.
+- **Get All Users** (Admin only):  
+  Retrieve all registered users:
   ```bash
   GET /api/admin/users
   ```
 
+---
+
 ## Testing
 
-### register Test
-
-To test the registration functionality, use tools like Postman or CURL to send requests to the `/api/register` endpoint.
-
-### login Test
-
-To test the login functionality, use tools like Postman or CURL to send requests to the `/api/login` endpoint.
-
-### User Authentication Test
-
-#### Example `tests/auth.test.js`
-
+### Registration Test
+Use `pytest` to test the registration functionality:
 ```python
-const request = require('supertest');
-const app = require('../app'); // make sure the path is correct
-
-describe('User Authentication', () => {
-  it('should signup a new user', async () => {
-    const res = await request(app)
-      .post('/api/auth/signup')
-      .send({
-        firstname: 'gabriel',
-        lastname: 'Pawuoi',
-        email: 'gabriel@example.com',
-        password: 'secret123',
-        address: '123 Main St'
-      });
-    expect(res.statusCode).toBe(201);
-    expect(res.body.message).toContain('registered successfully');
-  });
-
-  it('should login an existing user', async () => {
-    const res = await request(app)
-      .post('/api/auth/login')
-      .send({
-        email: 'gabriel@example.com',
-        password: 'secret123'
-      });
-    expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty('token');
-  });
-
-  it('should not login with incorrect credentials', async () => {
-    const res = await request(app)
-      .post('/api/auth/login')
-      .send({
-        email: 'gabriel@example.com',
-        password: 'wrongpassword'
-      });
-    expect(res.statusCode).toBe(400);
-    expect(res.body.error).toContain('Invalid credentials');
-  });
-});
+def test_registration(client):
+    response = client.post('/api/register', json={
+        "firstname": "Gabriel",
+        "lastname": "Pawuoi",
+        "email": "gabriel.pawuoi@example.com",
+        "password": "password123"
+    })
+    assert response.status_code == 201
+    assert "registered successfully" in response.json['message']
 ```
+
+### Login Test
+To test the login functionality:
+```python
+def test_login(client):
+    response = client.post('/api/login', json={
+        "email": "gabriel.pawuoi@example.com",
+        "password": "password123"
+    })
+    assert response.status_code == 200
+    assert "token" in response.json
+```
+
+---
 
 ## CI/CD Pipeline
 
-The CI/CD pipeline is set up using GitHub Actions. You can find the configuration in the `.github/workflows/ci-cd.yml` file.
+The CI/CD pipeline is set up with GitHub Actions. It includes the following steps:
+- **Linting**: Ensures code adheres to style guidelines.
+- **Testing**: Runs unit tests.
+- **Deployment**: Deploys the application to the live server.
 
-## Contributing
+Configuration is in the `.github/workflows/ci-cd.yml` file.
 
-Contributions are welcome. Please fork the repository, create a feature branch, and submit a pull request for review.
+---
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) file for more details.
 
-## Project owner
-- **Gabriel** - [GitHub Profile](https://github.com/KhotKeys)
+---
 
-## Live Applications
+## Contributing
 
-- **Web Application:** [https://innovatech.pythonanywhere.com](https://innovatech.pythonanywhere.com/login)
-- **Admin Web Application:** [https://innovatech.pythonanywhere.com](https://innovatech.pythonanywhere.com/login)
-  - **Admin Credentials:**
-    - **Email:** admin@admin.com
-    - **Password:** admin
+Contributions are welcome! Follow these steps:
+1. Fork the repository.
+2. Create a feature branch.
+3. Submit a pull request for review.
 
-## Happy Ending 🎉
+---
+
+## Project Owner
+
+- **Gabriel**  
+  GitHub: [KhotKeys](https://github.com/KhotKeys)
+
+---
+
+## Live Application
+
+- **Web Application**: [https://innovatech.pythonanywhere.com/login](https://innovatech.pythonanywhere.com/login)  
+- **Admin Login**:  
+  - **Email**: admin@admin.com  
+  - **Password**: admin
+
+**Happy Ending🎉**
